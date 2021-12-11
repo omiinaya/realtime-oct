@@ -1,0 +1,16 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  position: absolute;
+  width: 100%;
+  border: 2px solid red;
+}
+
+video {
+  position: absolute;
+  width: 100%;
+}
