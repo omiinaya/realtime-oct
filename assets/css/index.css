@@ -6,11 +6,9 @@ body {
 
 canvas {
   position: absolute;
-  width: 100%;
-  border: 2px solid red;
 }
 
 video {
-  position: absolute;
   width: 100%;
+  position: absolute;
 }

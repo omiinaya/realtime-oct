@@ -1,14 +1,11 @@
 const { desktopCapturer } = require('electron');
 const ipc = require('electron').ipcRenderer
-const { createWorker, createScheduler } = Tesseract;
-const videoElement = document.querySelector('video');
-const scheduler = createScheduler();
-let timerId = null;
+const video = document.querySelector('video');
+const canvas = document.querySelector('canvas');
 
-document.addEventListener("DOMContentLoaded", function () {
+window.onload = function () {
   getVideoSources()
-  initialize()
-});
+}
 
 async function getVideoSources() {
   const inputSources = await desktopCapturer.getSources({
@@ -22,7 +19,6 @@ async function getVideoSources() {
   })
 }
 
-//change the videoSource window to record
 async function selectSource(source) {
   const constraints = {
     audio: false,
@@ -36,6 +32,26 @@ async function selectSource(source) {
 
   const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
-  videoElement.srcObject = stream;
-  videoElement.play()
+  video.srcObject = stream;
+  video.play()
+}
+
+function resizeCanvas() {
+  var vW = video.getBoundingClientRect().width
+  var vH = video.getBoundingClientRect().height
+  var vT = video.getBoundingClientRect().top
+  var vL = video.getBoundingClientRect().left
+  canvas.style.width = vW + "px";
+  canvas.style.height = vH + "px";
+  canvas.style.top = vT + "px";
+  canvas.style.left = vL + "px";
+}
+
+window.addEventListener('resize', function () {
+  resizeCanvas()
+});
+
+function start() {
+  canvas.style.border = '2px solid red'
+  console.log('Color tracker has been started.')
 }
